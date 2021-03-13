@@ -56,12 +56,12 @@ public class RoomController {
         
     	int roomcount = 1;
     	for(RoomDTO roomDto : roomDtoList) {
-    		if(Integer.parseInt(roomDto.getId()) != roomcount) {
+    		if(roomDto.getId() != roomcount) {
     			break;
     		}
     		roomcount +=1;
     	}
-    	String roomId = Integer.toString(roomcount);
+    	int roomId = roomcount;
 	
 		dto.setId(roomId);
     	dto.setMaster(((MemberVO)session.getAttribute("loginid")).getId());

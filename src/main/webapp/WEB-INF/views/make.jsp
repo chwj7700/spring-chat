@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 	<style>
       .inputroom{
@@ -34,7 +34,7 @@
 	var subject = document.getElementById("subject");
 	if(subject.value=="")
 		{
-		alert("¹æÁ¦¸ñÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä");
+		alert("ë°©ì œëª©ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”");
 		return false;
 		}
 	else
@@ -51,21 +51,21 @@
     width:700px; background-color: white;">Spring Web Chatting</div><br/><br/>
 
  <div style=" width:700px; height:400px; border:1px solid #eaeaea; background-color: white;">
-      <br/><br/><br/><br/><h4><font color="#ABABAB">Ã¤ÆÃ¹æ ÀÌ¸§À» ÀÔ·ÂÇØÁÖ¼¼¿ä</font></h4>
+      <br/><br/><br/><br/><h4><font color="#ABABAB">ì±„íŒ…ë°© ì´ë¦„ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”</font></h4>
 
    <form method="post" onsubmit="return aas();">
                
-               <h4>¹æ Á¦¸ñ</h4>
+               <h4>ë°© ì œëª©</h4>
                
             <input id="subject" class="inputroom" type="text" name="subject" maxlength="10"
             		style="text-align : center; border-top:2px solid #ffffff;
             			  border-left:2px solid #ffffff; border-right:2px solid #ffffff;
             			   border-bottom:2px solid #eaeaea;">
            
-            <input type="submit" id="btn" class="roombutton" value="¸¸µé±â" />
+            <input type="submit" id="btn" class="roombutton" value="ë§Œë“¤ê¸°" />
    </form>
     <c:if test="${msg==false}">
-   <span style="color:#f00;">¹æ Á¦¸ñÀ» ÀÔ·ÂÇØ ÁÖ¼¼¿ä!</span>
+   <span style="color:#f00;">ë°© ì œëª©ì„ ìž…ë ¥í•´ ì£¼ì„¸ìš”!</span>
    </c:if>
    </div>
 </center>

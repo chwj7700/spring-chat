@@ -23,37 +23,37 @@ import com.spring.dto.RoomDTO;
 import com.spring.mapper.NoticeMapper;
 import com.spring.mapper.RoomMapper;
 import com.spring.chat.HomeController;
+
 /**
  * Handles requests for the application home page.
  */
 @Controller
 public class HomeController {
- 
-    @Autowired
-    private SqlSession sqlSession;
-    
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String home(Locale locale, Model model) {
-    	NoticeMapper noticeMapper = sqlSession.getMapper(NoticeMapper.class);
-    	List<NoticeVO> noticeVoList = noticeMapper.SelectNotices();
-    	
-    	model.addAttribute("notice", noticeVoList);
-    
-    	RoomMapper mapper = sqlSession.getMapper(RoomMapper.class);
-    	int roomCount = mapper.countColumns();
-    	
-    	RoomDTO room[] = new RoomDTO[roomCount];
-    	for (int i = 0; i < roomCount; i++) {
-	        RoomDTO mapperRoom = mapper.selectRooms().get(i);
-	        room[i] = new RoomDTO();
-	        room[i].setId(mapperRoom.getId());
-	        room[i].setSubject(mapperRoom.getSubject());
-	        room[i].setMaster(mapperRoom.getMaster());
-    	}
-	        model.addAttribute("room", room);
-    	
-        return "home";
- }
+
+	@Autowired
+	private SqlSession sqlSession;
+
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Locale locale, Model model) {
+		NoticeMapper noticeMapper = sqlSession.getMapper(NoticeMapper.class);
+		List<NoticeVO> noticeVoList = noticeMapper.SelectNotices();
+
+		model.addAttribute("notice", noticeVoList);
+
+		RoomMapper mapper = sqlSession.getMapper(RoomMapper.class);
+		int roomCount = mapper.countColumns();
+
+		List<RoomDTO> room = mapper.selectRoomsWithPaging(10, 0);
+//    	for (int i = 0; i < roomCount; i++) {
+//	        RoomDTO mapperRoom = mapper.selectRoomsWithPaging(10,0).get(i);
+//	        room[i] = new RoomDTO();
+//	        room[i].setId(mapperRoom.getId());
+//	        room[i].setSubject(mapperRoom.getSubject());
+//	        room[i].setMaster(mapperRoom.getMaster());
+//    	}
+		model.addAttribute("room", room);
+		model.addAttribute("roomCount", roomCount);
+		model.addAttribute("pageName", "chatList");
+		return "home";
+	}
 }
-
-

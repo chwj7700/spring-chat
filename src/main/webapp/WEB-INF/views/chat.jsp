@@ -12,7 +12,7 @@
     var pathname = window.location.pathname; /* '/'부터 오른쪽에 있는 모든 경로*/
     var appCtx = pathname.substring(0, pathname.indexOf("/",2));
     var root = url+appCtx;
-    var path ="/chat"; //프로젝트 패스
+    var path =""; //프로젝트 패스
      
     //var ws = new WebSocket("ws://192.168.0.100:8081/SpringWeb/echo-ws");
     var ws = new WebSocket("ws://"+root+"/echo-ws");

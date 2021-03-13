@@ -12,18 +12,26 @@
 
 <script type="text/javascript">
 	var data = {};
-	data.pageName = "joinForm";
-	
+	data.pageName = "chatList";
+
 	var page = function page(pageName) {
-		document.querySelector(data.pageName).style = "display:none";
+		document.querySelector("#" + data.pageName).style = "display:none";
 		data.pageName = pageName;
-		document.querySelector("#"+pageName).style = "display:block";
+		document.querySelector("#" + pageName).style = "display:block";
 	};
 </script>
 
 <body>
 	<!-- 헤더 -->
-	<div style ="margin-bottom: 60px;">
+	<input type="hidden" id="pageName" name="pageName" value="${pageName}" />
+	<script type="text/javascript">
+		$(function() {
+			data.pageName = document.querySelector("#pageName").value;
+			page(data.pageName);
+		});
+	</script>
+
+	<div style="margin-bottom: 60px;">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container">
 				<a class="navbar-brand" href="/">Web chatting</a>
@@ -40,10 +48,18 @@
 						<ul class="navbar-nav">
 							<li class="nav-item active"><a class="nav-link"
 								onclick='page("notice")'>공지사항</a></li>
-							<li class="nav-item"><a class="nav-link"
-								onclick='page("loginForm")'>마이페이지</a></li>
-							<li class="nav-item"><a class="nav-link" onclick='page("loginForm")'>로그인</a></li>
-							<li class="nav-item"><a class="nav-link" onclick='page("joinForm")'>회원가입</a></li>
+							<c:if test="${loginid.id != null }">
+								<li class="nav-item"><a class="nav-link"
+									onclick='page("loginForm")'>마이페이지</a></li>
+								<li class="nav-item"><a class="nav-link"
+									href='/logout'>로그아웃</a></li>
+							</c:if>
+							<c:if test="${loginid.id == null }">
+								<li class="nav-item"><a class="nav-link"
+									onclick='page("loginForm")'>로그인</a></li>
+								<li class="nav-item"><a class="nav-link"
+									onclick='page("joinForm")'>회원가입</a></li>
+							</c:if>
 						</ul>
 					</form>
 				</div>
