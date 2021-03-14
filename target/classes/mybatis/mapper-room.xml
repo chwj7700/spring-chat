@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.spring.mapper.RoomMapper">
 
-	<resultMap type="com.spring.dto.RoomDTO" id="RoomResultList">
+	<resultMap type="com.spring.dto.RoomVO" id="RoomResultList">
 		<result property="id" column="id" />
 		<result property="subject" column="subject" />
 		<result property="master" column="master" />
@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</sql>
 
 
-	<select id="selectRoom" resultType="com.spring.dto.RoomDTO" parameterType="int">
+	<select id="selectRoom" resultType="com.spring.dto.RoomVO" parameterType="int">
 		SELECT id, subject, master FROM room WHERE id = #{id}
 	</select>
 
@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DELETE FROM room WHERE id = #{roomId}
 	</delete>
 
-	<insert id="insertRoom" parameterType="com.spring.dto.RoomDTO">
+	<insert id="insertRoom" parameterType="com.spring.dto.RoomVO">
 		INSERT INTO room (id, subject, master) VALUES(#{id}, #{subject}, #{master})
 	</insert>
 
