@@ -1,13 +1,18 @@
 package com.spring.dto;
 
 //room ���̺�
-public class RoomDTO {
+/**
+ * @author chwj7
+ *
+ */
+public class RoomVO {
 
 	private int id;
 	private String master;
 	private String subject;
+	private int cnt;
 
-	public RoomDTO() {
+	public RoomVO() {
 	}
 
 	public int getId() {
@@ -32,6 +37,14 @@ public class RoomDTO {
 
 	public void setMaster(String master) {
 		this.master = master;
+	}
+
+	public int getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
 	}
 
 }

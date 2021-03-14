@@ -270,7 +270,7 @@
 
 		<c:if  test="${id == master}">
 			<form method="post" action="./delete">
-			<input type="hidden" id="roomId" name="roomId" value="<%=request.getParameter("roomID").toString()%>">
+			<input type="hidden" id="roomId" name="roomId" value="<%=request.getParameter("roomId").toString()%>">
 			<input type="submit" id="deleteButton" value="방 삭제" style="width:150px; font-size:17px; float:right; height:30px; text-align: 
 			center;background: #00AE8E ;border: none; border-radius: 5px; color:white;">
 			</form>

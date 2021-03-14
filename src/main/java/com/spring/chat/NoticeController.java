@@ -10,20 +10,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.spring.mapper.NoticeMapper;
+import com.spring.service.NoticeService;
 
 @Controller
 public class NoticeController {
     @Autowired
-    private SqlSession sqlSession;
+    private NoticeService noticeService;
     
     @RequestMapping(value = "/makenotice", method=RequestMethod.GET)
     public void GetMakeNotice() throws Exception {}
     
     @RequestMapping(value = "/makenotice", method=RequestMethod.POST)
     public String PostMakeNotice(String comment, HttpServletResponse response) throws Exception {
-    	NoticeMapper noticeMapper = sqlSession.getMapper(NoticeMapper.class);
-    	noticeMapper.InsertNotice(comment);
+    	noticeService.insertNotice(comment);
     	
     	response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();	 

@@ -10,12 +10,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="comment" column="comment" />
     </resultMap>
     
-    <select id="SelectNotices" resultMap="NoticeResultList">
-        SELECT id,comment FROM notice ORDER BY id DESC LIMIT 3
+    <select id="selectNotices" resultMap="NoticeResultList">
+        SELECT id, comment
+          FROM notice
+      ORDER BY id DESC LIMIT 3
     </select>
      
-    <insert id="InsertNotice" parameterType="String">
-        INSERT into notice (comment) values(#{comment})
+    <insert id="insertNotice" parameterType="String">
+        INSERT INTO notice (comment) VALUES(#{comment})
     </insert>
     
 </mapper>

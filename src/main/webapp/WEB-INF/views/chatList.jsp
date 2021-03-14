@@ -2,9 +2,26 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<script type="text/javascript">
+	//axios
+// 	const option ={
+// 	  url ='http://localhost:8080/test'
+// 	   method:'POST',
+// 	   header:{
+// 	     'Accept':'application/json',
+// 	     'Content-Type':'application/json';charset=UTP-8'
+// 	  },
+// 	  data:{
+// 	  	name:'sewon',
+// 	    	age:20
+// 	  }
+	
+// 	  axios(options)
+// 	  	.then(response => console.log(response))
+</script>
+
 <div>
 	<div>
-
 		<c:if test="${loginid.id != null }">
 			<div style="height: 45px;">
 				<button class=" btn btn-secondary"
@@ -28,7 +45,7 @@
 							<td style="text-align: center;">${room.id}</td>
 							<td><c:if test="${loginid.id != null }">
 									<b> <a style="cursor: pointer;"
-										onclick="window.open('/chat?roomID=${room.id}', 'windo', 'width=820,height=490,left=' + popupX2 + ',top='+ popupY2)">${room.subject}</a>
+										onclick="window.open('/chat?roomId=${room.id}', 'windo', 'width=820,height=490,left=' + popupX2 + ',top='+ popupY2)">${room.subject}</a>
 									</b>
 								</c:if> <c:if test="${loginid.id == null }">
 									<a>${room.subject}</a>

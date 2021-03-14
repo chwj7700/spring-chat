@@ -17,8 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.dto.MemberVO;
@@ -51,21 +49,21 @@ public class MemberController {
 		logger.info("post join");
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-
-		String idCheck = sqlSession.selectOne("IdCheck", vo.getId());
+		
+		MemberVO member = service.selectMember(vo);
 
 		if (bindingResult.hasErrors()) {
 			out.println("<script>alert('회원가입에 실패했습니다. 빈칸이 있는지 다시한번 확인해주세요.'); location.href='./?join=join';</script>");
 			out.flush();
 			return null;
-		} else if (idCheck != null) {
+		} else if (member != null) {
 			out.println("<script>alert('사용하고 있는 아이디입니다.'); location.href='./?join=join';</script>");
 			out.flush();
 			return null;
 		} else {
 			out.println("<script>alert('회원가입성공.'); location.href='./';</script>");
 			out.flush();
-			service.join(vo);
+			service.insertMember(vo);
 			return null;
 		}
 
@@ -77,7 +75,8 @@ public class MemberController {
 		logger.info("post login");
 
 		HttpSession session = req.getSession();
-		MemberVO login = service.login(vo);
+		MemberVO login = service.selectMember(vo);
+
 		if (login == null) {
 			logger.info("로그인if");
 			session.setAttribute("loginid", null);

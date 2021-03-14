@@ -11,22 +11,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="pw" column="pw" />
     </resultMap>
  
-    <select id="login" resultType="com.spring.dto.MemberVO">
-        SELECT id,name
-        from member
-        where id = #{id}
-        	and pw = #{pw}
+    <select id="selectMember" resultType="com.spring.dto.MemberVO">
+        SELECT id, name
+          FROM member
+         WHERE id = #{id}
+           AND pw = #{pw}
     </select>
     
-    <select id="IdCheck" parameterType="String" resultType="String">
+    <select id="idCheck" parameterType="String" resultType="String">
         SELECT id
-        from member
-        where id = #{id}
+          FROM member
+         WHERE id = #{id}
     </select>
  
  
-    <insert id="join" parameterType="com.spring.dto.MemberVO">
-        INSERT into member (id, pw, name) values(#{id}, #{pw}, #{name})
+    <insert id="insertMember" parameterType="com.spring.dto.MemberVO">
+        INSERT INTO member(id, pw, name) 
+        VALUES(#{id}, #{pw}, #{name})
     </insert>
      
     

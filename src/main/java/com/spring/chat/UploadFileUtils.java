@@ -10,8 +10,6 @@ import javax.imageio.ImageIO;
 import org.imgscalr.Scalr;
 import org.springframework.util.FileCopyUtils;
 
-import com.spring.chat.MediaUtils;
-
 public class UploadFileUtils {
 	
 	public static String uploadFile(String uploadPath, String originalName, byte[] fileData) throws Exception {

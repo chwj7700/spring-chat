@@ -16,41 +16,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="selectRoomsWithPaging" resultMap="RoomResultList" parameterType="int">
-<!-- 		<include refid="COMMON_PAGING_HEADER"/> -->
-		select paging.* FROM(
+		<include refid="COMMON_PAGING_HEADER"/>
 			SELECT id, subject, master FROM room order by id
-			) paging LIMIT #{length} OFFSET #{start}
-<!-- 		<include refid="COMMON_PAGING_TAIL"/> -->
+		<include refid="COMMON_PAGING_TAIL"/>
 	</select>
 
-<!-- 	<sql id="COMMON_PAGING_HEADER"> -->
-<!-- 		select paging.* FROM( -->
-<!-- 	</sql> -->
+	<sql id="COMMON_PAGING_HEADER">
+		SELECT paging.* FROM(
+	</sql>
 
-<!-- 	<sql id="COMMON_PAGING_TAIL"> -->
-<!-- 		) paging -->
-<!-- 		LIMIT #{length, jdbcType=INTEGER} OFFSET #{start, jdbcType=INTEGER} -->
-<!-- 	</sql> -->
+	<sql id="COMMON_PAGING_TAIL">
+		) paging
+		LIMIT #{length, jdbcType=INTEGER} OFFSET #{start, jdbcType=INTEGER}
+	</sql>
 
 
-	<select id="selectRoomInfo" resultType="com.spring.dto.RoomDTO">
-		SELECT id, subject, master FROM room where id = #{id}
+	<select id="selectRoom" resultType="com.spring.dto.RoomDTO" parameterType="int">
+		SELECT id, subject, master FROM room WHERE id = #{id}
 	</select>
 
-	<select id="countColumns" resultType="int">
+	<select id="selectRoomTotalCount" resultType="int">
 		SELECT count(*) FROM room
 	</select>
 
-	<insert id="InsertRoom" parameterType="com.spring.dto.RoomDTO">
-		INSERT into room (id, subject, master) values(#{id}, #{subject}, #{master})
-	</insert>
-
 	<delete id="DeleteRoom" parameterType="int">
-		Delete from room where id = #{roomId}
+		DELETE FROM room WHERE id = #{roomId}
 	</delete>
 
-	<insert id="make" parameterType="com.spring.dto.RoomDTO">
-		INSERT into room (id) values(#{id})
+	<insert id="insertRoom" parameterType="com.spring.dto.RoomDTO">
+		INSERT INTO room (id, subject, master) VALUES(#{id}, #{subject}, #{master})
 	</insert>
 
 
