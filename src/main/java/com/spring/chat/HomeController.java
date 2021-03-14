@@ -9,11 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.spring.dto.NoticeVO;
-import com.spring.dto.RoomVO;
 import com.spring.service.NoticeService;
 import com.spring.service.RoomService;
 import com.spring.chat.HomeController;
+import com.spring.domain.Notice;
+import com.spring.domain.Room;
 
 /**
  * Handles requests for the application home page.
@@ -29,11 +29,14 @@ public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		List<NoticeVO> noticeVoList = noticeService.selectNotices();
+		List<Notice> notices = noticeService.selectNotices();
 
-		model.addAttribute("notice", noticeVoList);
-
-		List<RoomVO> room = roomService.selectRoomsWithPaging(10, 0);
+		model.addAttribute("notice", notices);
+		
+		Room roomVO = new Room();
+		roomVO.setLength(10);
+		roomVO.setStart(0);
+		List<Room> room = roomService.selectRoomsWithPaging(roomVO);
 		int roomCount = roomService.selectRoomTotalCount();
 
 		model.addAttribute("room", room);

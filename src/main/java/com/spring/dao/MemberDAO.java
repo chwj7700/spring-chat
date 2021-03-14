@@ -1,12 +1,10 @@
-package com.spring.DAO;
-
-import javax.inject.Inject;
+package com.spring.dao;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.spring.dto.MemberVO;
+import com.spring.domain.Member;
 
 @Repository(value = "MemberDAO")
 public class MemberDAO{
@@ -16,11 +14,11 @@ public class MemberDAO{
 	
 	private static String namespace = "com.spring.mapper.MemberMapper";
 	
-	public void insertMember(MemberVO vo){
+	public void insertMember(Member vo){
 		sql.insert(namespace + ".insertMember", vo);
 	}
 	
-	public MemberVO selectMember(MemberVO vo){
+	public Member selectMember(Member vo){
 		return sql.selectOne(namespace + ".selectMember", vo);
 	}
 	

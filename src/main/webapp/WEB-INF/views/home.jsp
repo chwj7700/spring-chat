@@ -24,9 +24,8 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
-	
-	<div class="container">
 
+	<div class="container body">
 		<div id="joinForm" style="display: none;">
 			<jsp:include page="joinForm.jsp" />
 		</div>

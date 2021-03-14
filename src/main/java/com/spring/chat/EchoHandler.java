@@ -16,7 +16,7 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import com.spring.dto.MemberVO;
+import com.spring.domain.Member;
 
 public class EchoHandler extends TextWebSocketHandler {
 	
@@ -54,8 +54,8 @@ public class EchoHandler extends TextWebSocketHandler {
         super.afterConnectionEstablished(session);
         Map<String,Object> map = session.getAttributes(); 
         
-    	MemberVO login = new MemberVO();
-    	login = (MemberVO)map.get("loginid");
+    	Member login = new Member();
+    	login = (Member)map.get("loginid");
     	String loginID = login.getId();
     	String roomId = (String)map.get("roomId");
     	

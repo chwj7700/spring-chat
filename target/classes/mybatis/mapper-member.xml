@@ -5,13 +5,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
 <mapper namespace="com.spring.mapper.MemberMapper">
  
-    <resultMap type="com.spring.dto.MemberVO" id="TestResultList">
+    <resultMap type="com.spring.domain.Member" id="TestResultList">
         <result property="id" column="id" />
         <result property="name" column="name" />
         <result property="pw" column="pw" />
     </resultMap>
  
-    <select id="selectMember" resultType="com.spring.dto.MemberVO">
+    <select id="selectMember" resultType="com.spring.domain.Member">
         SELECT id, name
           FROM member
          WHERE id = #{id}
@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
  
  
-    <insert id="insertMember" parameterType="com.spring.dto.MemberVO">
+    <insert id="insertMember" parameterType="com.spring.domain.Member">
         INSERT INTO member(id, pw, name) 
         VALUES(#{id}, #{pw}, #{name})
     </insert>

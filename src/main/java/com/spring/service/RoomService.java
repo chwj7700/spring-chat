@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.DAO.RoomDAO;
-import com.spring.dto.RoomVO;
+import com.spring.dao.RoomDAO;
+import com.spring.domain.Room;
 
 @Service(value = "RoomService")
 public class RoomService {
@@ -14,8 +14,8 @@ public class RoomService {
 	@Autowired
 	private RoomDAO dao;
 
-	public List<RoomVO> selectRoomsWithPaging(int length, int start) {
-		List<RoomVO> rooms = dao.selectRoomsWithPaging(length, start);
+	public List<Room> selectRoomsWithPaging(Room roomVO) {
+		List<Room> rooms = dao.selectRoomsWithPaging(roomVO);
 		return rooms;
 	}
 
@@ -24,17 +24,17 @@ public class RoomService {
 		return cnt;
 	}
 
-	public List<RoomVO> selectRooms() {
-		List<RoomVO> rooms = dao.selectRooms();
+	public List<Room> selectRooms() {
+		List<Room> rooms = dao.selectRooms();
 		return rooms;
 	}
 
-	public RoomVO selectRoom(int roomId) {
-		RoomVO room = dao.selectRoom(roomId);
+	public Room selectRoom(int roomId) {
+		Room room = dao.selectRoom(roomId);
 		return room;
 	}
 	
-	public void insertRoom(RoomVO roomDTO) {
+	public void insertRoom(Room roomDTO) {
 		dao.insertRoom(roomDTO);
 	}
 

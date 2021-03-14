@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.DAO.NoticeDAO;
-import com.spring.dto.NoticeVO;
+import com.spring.dao.NoticeDAO;
+import com.spring.domain.Notice;
 
 @Service(value = "NoticeService")
 public class NoticeService {
@@ -14,8 +14,8 @@ public class NoticeService {
 	@Autowired
 	private NoticeDAO dao;
 
-	public List<NoticeVO> selectNotices() {
-		List<NoticeVO> notices = dao.selectNotices();
+	public List<Notice> selectNotices() {
+		List<Notice> notices = dao.selectNotices();
 		return notices;
 	}
 

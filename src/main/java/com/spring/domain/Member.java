@@ -1,10 +1,10 @@
-package com.spring.dto;
+package com.spring.domain;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 //member ���̺�
-public class MemberVO {
-	 @NotEmpty
+public class Member {
+	@NotEmpty
 	private String id, pw ,name;
 
 	public String getId() {

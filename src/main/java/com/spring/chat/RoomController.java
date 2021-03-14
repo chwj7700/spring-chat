@@ -15,20 +15,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.spring.dto.MemberVO;
-import com.spring.dto.RoomVO;
+import com.spring.domain.Member;
+import com.spring.domain.Room;
 import com.spring.service.RoomService;
+import com.spring.vo.RoomVO;
 
 @Controller
 public class RoomController {
-	
-    @Autowired
-    private SqlSession sqlSession;
     
 	@Autowired
 	private RoomService roomService;
@@ -52,21 +52,21 @@ public class RoomController {
     public void getmake() throws Exception {}
     
     @RequestMapping(value="/make", method=RequestMethod.POST)
-    public String postmake(@Valid RoomVO dto, HttpServletResponse response,RedirectAttributes rttr, HttpServletRequest req, BindingResult bindingResult) throws Exception{
+    public String postmake(@Valid Room room, HttpServletResponse response,RedirectAttributes rttr, HttpServletRequest req, BindingResult bindingResult) throws Exception{
     	HttpSession session = req.getSession();
-    	List<RoomVO> roomDtoList = roomService.selectRooms();
+    	List<Room> roomList = roomService.selectRooms();
         
     	int roomId = 1;
-    	for(RoomVO roomDto : roomDtoList) {
-    		if(roomDto.getId() != roomId) {
+    	for(Room e : roomList) {
+    		if(e.getId() != roomId) {
     			break;
     		}
     		roomId +=1;
     	}
 	
-		dto.setId(roomId);
-    	dto.setMaster(((MemberVO)session.getAttribute("loginid")).getId());
-    	roomService.insertRoom(dto);
+    	room.setId(roomId);
+    	room.setMaster(((Member)session.getAttribute("loginid")).getId());
+    	roomService.insertRoom(room);
     	
     	response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();	 
@@ -78,19 +78,28 @@ public class RoomController {
     @RequestMapping(value = "/chat", method=RequestMethod.GET)
     public String chat(Model model, @RequestParam(value="roomId")int roomId, HttpServletRequest req) {
     	HttpSession session = req.getSession();
-    	MemberVO login = new MemberVO();
+    	Member login = new Member();
     	
-    	login = (MemberVO)session.getAttribute("loginid");
+    	login = (Member)session.getAttribute("loginid");
     	String loginid = login.getId();
     	
     	session.setAttribute("roomId", roomId);
     	model.addAttribute("id", loginid);
     	
-    	RoomVO room = roomService.selectRoom(roomId);
+    	Room room = roomService.selectRoom(roomId);
     	model.addAttribute("subject", room.getSubject());
     	model.addAttribute("master", room.getMaster());
     	
     	System.out.println(loginid + "   1  " + room.getMaster());
     	return "chat";
+    }
+    
+    @RequestMapping(value="/roomSearch", method=RequestMethod.POST)
+    @ResponseBody
+    public RoomVO roomSearch(@RequestBody Room room) throws Exception{
+		List<Room> rooms = roomService.selectRoomsWithPaging(room);
+		int roomCount = roomService.selectRoomTotalCount();
+		RoomVO roomVO =  RoomVO.createRoomVO(rooms, roomCount);
+		return roomVO;
     }
 }

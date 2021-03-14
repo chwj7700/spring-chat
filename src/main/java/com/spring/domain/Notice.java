@@ -1,6 +1,6 @@
-package com.spring.dto;
+package com.spring.domain;
 
-public class NoticeVO {
+public class Notice {
 	int id;
 	String comment;
 	

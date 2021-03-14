@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
 <mapper namespace="com.spring.mapper.NoticeMapper">
 
-    <resultMap type="com.spring.dto.NoticeVO" id="NoticeResultList">
+    <resultMap type="com.spring.domain.Notice" id="NoticeResultList">
         <result property="id" column="id" />
         <result property="comment" column="comment" />
     </resultMap>

@@ -1,18 +1,17 @@
-package com.spring.dto;
+package com.spring.domain;
 
-//room ���̺�
 /**
- * @author chwj7
- *
+ * @author chwj7700
  */
-public class RoomVO {
+public class Room {
 
 	private int id;
 	private String master;
 	private String subject;
-	private int cnt;
+	private int length;
+	private int start;
 
-	public RoomVO() {
+	public Room() {
 	}
 
 	public int getId() {
@@ -38,13 +37,21 @@ public class RoomVO {
 	public void setMaster(String master) {
 		this.master = master;
 	}
-
-	public int getCnt() {
-		return cnt;
+	
+	public int getLength() {
+		return length;
 	}
 
-	public void setCnt(int cnt) {
-		this.cnt = cnt;
+	public void setLength(int length) {
+		this.length = length;
+	}
+
+	public int getStart() {
+		return start;
+	}
+
+	public void setStart(int start) {
+		this.start = start;
 	}
 
 }
