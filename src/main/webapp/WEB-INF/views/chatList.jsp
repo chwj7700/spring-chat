@@ -4,8 +4,11 @@
 
 <script type="text/javascript">
 
-//== restFull 하게 바꾸면 변경하는데 너무오래걸릴듯 ==//
-	let search = function() {
+	let subject_onclick = (id) =>{
+		window.open('/chat?roomId='+ id, 'windo', 'width=820,height=490,left=' + popupX2 + ',top='+ popupY2);
+	};
+	
+	let room_search = (page) => {
 		const option = {
 				  url : 'http://localhost:8080/roomSearch',
 				  method:'POST',
@@ -17,27 +20,79 @@
 					id : document.querySelector('#chat_search_id').value,
 					master : document.querySelector('#chat_search_master').value,
 					subject : document.querySelector('#chat_search_subject').value,
-				    length : '10',
-				    start : '0'
+				    length : 10,
+				    start : (page-1) * 10
 				  }
 		};
 		axios(option)
 			.then(response => {
-// 				let data = response.data;
-// 				let tbody = "";
-// 				data.foreach(e => {
-// 					let id = e.id;
-// 					let subject = e.subject;
-// 					let master = e.master;
-// 					let row = $("<tr/>").append(
-// 			              $("<td/>").text(id); 
-// 			              $("<td/>").text(subject);      
-// 			              $("<td/>").text(master);
-// 			            );
-// 				})
-		console.log(response.data);
-			})
-		    .catch(response => console.log('Error!'));
+				
+				//==방정보 화면에 보여주기==//
+				let room = response.data.room;
+				let tbody = "";
+				room.forEach(e => {
+					let id = e.id;
+					let subject = e.subject;
+					let master = e.master;
+					
+					let row = '<tr>' +
+							'<td style="text-align: center;">'+ id +'</td>'+
+							'<td> <b>'+
+							'<a style="cursor: pointer;" onclick="subject_onclick('+id+')">' +
+							subject + '</a> </b> </td>' +
+							'<td>'+ master +'</td>' +
+							'</tr>';
+					tbody += row;
+				});
+				document.querySelector('#chat_table_tbody').innerHTML=tbody;
+				
+				
+				//==페이징 처리==//
+				let pageCount = 10;
+				let totCount = response.data.count;
+				let totPage = parseInt(totCount / pageCount) + 1;
+				let startPage = page - page%pageCount + 1;
+				let endPage = startPage + pageCount -1;
+				
+				//endpage가 totpage보다 크면 안된다.
+				endPage = endPage > totPage ? totPage : endPage;
+				
+				//previousPage가 1보다 작으면 안된다.
+				let previousPage = startPage-1;
+				previousPage = 1 > previousPage ? 1 : previousPage;
+				
+				//nextPage가 totpage보다 크면 안된다.
+				let nextPage = endPage + 1;
+				nextPage = nextPage > totPage ? totPage : nextPage;
+				
+				let pagination = "";
+				let pagePrevious = '<li class="page-item">'+
+				'<a class="page-link" onclick="room_search('+ previousPage +')" aria-label="Previous">'+
+				'<span aria-hidden="true">&laquo;</span>' +
+				'</a>'+
+				'</li>';
+				let pageNext = '<li class="page-item">' +
+				'<a class="page-link" onclick="room_search('+ nextPage +')"aria-label="Next">'+
+				'<span aria-hidden="true">&raquo;</span>'+
+				'</a>'+
+				'</li>';
+				
+				pagination += pagePrevious
+				for(let i = startPage; i<= endPage; i++){
+					let pageItem = '<li class="page-item"><a class="page-link" onclick="room_search('+ i +')">'+ i +'</a></li>';
+					pagination += pageItem;
+				}
+				pagination += pageNext;
+				
+				document.querySelector('#chat_paging').innerHTML=pagination;
+				console.log(data);
+			}).catch(response => console.log('Error!'));
+	};
+	
+	let room_reset = () => {
+		document.querySelector('#chat_search_id').value="";
+		document.querySelector('#chat_search_master').value="";
+		document.querySelector('#chat_search_subject').value="";
 	};
 </script>
 
@@ -63,9 +118,9 @@
 				<td class="align-bottom" colspan="4" style="width: 150px;">
 					<div style='float: right;'>
 						<button class="btn btn-secondary" style='width: 100px'
-							onclick='alert("초기화")'>초기화</button>
+							onclick='room_reset()'>초기화</button>
 						<button class="btn btn-primary" style='width: 100px'
-							onclick='search()'>조회</button>
+							onclick='room_search(1)'>조회</button>
 					</div>
 				</td>
 			</tr>
@@ -83,7 +138,7 @@
 
 		<!-- 검색결과 -->
 		<div>
-			<table class="table table-bordered">
+			<table class="table table-bordered" id="chat_table">
 				<thead class="table-active">
 					<tr style="text-align: center;">
 						<th width="10%">방 번호</th>
@@ -91,26 +146,13 @@
 						<th width="15%">방장</th>
 					</tr>
 				</thead>
-				<tbody>
-					<c:forEach var="room" items="${room}">
-						<tr>
-							<td style="text-align: center;">${room.id}</td>
-							<td><c:if test="${loginid.id != null }">
-									<b> <a style="cursor: pointer;"
-										onclick="window.open('/chat?roomId=${room.id}', 'windo', 'width=820,height=490,left=' + popupX2 + ',top='+ popupY2)">${room.subject}</a>
-									</b>
-								</c:if> <c:if test="${loginid.id == null }">
-									<a>${room.subject}</a>
-								</c:if></td>
-							<td>${room.master}
-						</tr>
-					</c:forEach>
+				<tbody id="chat_table_tbody">
 				</tbody>
 			</table>
 		</div>
 		<div>
 			<nav aria-label="Page navigation example">
-				<ul class="pagination justify-content-center">
+				<ul class="pagination justify-content-center" id="chat_paging">
 					<li class="page-item"><a class="page-link" href="#"
 						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 					</a></li>

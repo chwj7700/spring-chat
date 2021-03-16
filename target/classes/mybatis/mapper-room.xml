@@ -24,10 +24,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				AND id = #{id}
 			</if>
 			<if test ='subject != null and subject != ""'>
-				AND subject = #{subject}
+				AND subject LIKE CONCAT('%',#{subject},'%')
 			</if>
 			<if test ='master != null and master != ""'>
-				AND master #{master}
+				AND master = #{master}
 			</if>
 			ORDER BY id
 		<include refid="COMMON_PAGING_TAIL"/>
