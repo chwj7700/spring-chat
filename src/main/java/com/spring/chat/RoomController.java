@@ -98,7 +98,7 @@ public class RoomController {
     @ResponseBody
     public RoomVO roomSearch(@RequestBody Room room) throws Exception{
 		List<Room> rooms = roomService.selectRoomsWithPaging(room);
-		int roomCount = roomService.selectRoomTotalCount();
+		int roomCount = roomService.selectRoomTotalCount(room);
 		RoomVO roomVO =  RoomVO.createRoomVO(rooms, roomCount);
 		return roomVO;
     }

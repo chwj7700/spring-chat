@@ -14,7 +14,7 @@
 	var data = {};
 	data.pageName = "chatList";
 
-	var page = function page(pageName) {
+	var page = function (pageName) {
 		document.querySelector("#" + data.pageName).style = "display:none";
 		data.pageName = pageName;
 		document.querySelector("#" + pageName).style = "display:block";
@@ -34,7 +34,7 @@
 	<div style="margin-bottom: 60px;">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container">
-				<a class="navbar-brand" href="/">Web chatting</a>
+				<a class="navbar-brand" onclick='page("chatList")'>Web chatting</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarSupportedContent"
 					aria-controls="navbarSupportedContent" aria-expanded="false"

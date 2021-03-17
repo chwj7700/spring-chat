@@ -12,25 +12,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 	<select id="selectRooms" resultMap="RoomResultList">
-		SELECT id, subject, master FROM room
+		SELECT id, subject, master
+		FROM room
 	</select>
 
-	<select id="selectRoomsWithPaging" resultMap="RoomResultList" parameterType="com.spring.domain.Room">
-		<include refid="COMMON_PAGING_HEADER"/>
-			SELECT id, subject, master 
-			FROM room 
-			WHERE 1=1
-			<if test ='id != null and id != ""'>
-				AND id = #{id}
-			</if>
-			<if test ='subject != null and subject != ""'>
-				AND subject LIKE CONCAT('%',#{subject},'%')
-			</if>
-			<if test ='master != null and master != ""'>
-				AND master = #{master}
-			</if>
-			ORDER BY id
-		<include refid="COMMON_PAGING_TAIL"/>
+	<select id="selectRoomsWithPaging" resultMap="RoomResultList"
+		parameterType="com.spring.domain.Room">
+		<include refid="COMMON_PAGING_HEADER" />
+		SELECT id, subject, master
+		FROM room
+		WHERE 1=1
+		<if test='id != null and id != ""'>
+			AND id = #{id}
+		</if>
+		<if test='subject != null and subject != ""'>
+			AND subject LIKE CONCAT('%',#{subject},'%')
+		</if>
+		<if test='master != null and master != ""'>
+			AND master = #{master}
+		</if>
+		ORDER BY id
+		<include refid="COMMON_PAGING_TAIL" />
 	</select>
 
 	<sql id="COMMON_PAGING_HEADER">
@@ -39,24 +41,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<sql id="COMMON_PAGING_TAIL">
 		) paging
-		LIMIT #{length, jdbcType=INTEGER} OFFSET #{start, jdbcType=INTEGER}
+		LIMIT #{length, jdbcType=INTEGER} OFFSET #{start,
+		jdbcType=INTEGER}
 	</sql>
 
 
-	<select id="selectRoom" resultType="com.spring.domain.Room" parameterType="int">
+	<select id="selectRoom" resultType="com.spring.domain.Room"
+		parameterType="int">
 		SELECT id, subject, master FROM room WHERE id = #{id}
 	</select>
 
-	<select id="selectRoomTotalCount" resultType="int">
-		SELECT count(*) FROM room
+	<select id="selectRoomTotalCount" resultType="int" parameterType="com.spring.domain.Room">
+		SELECT count(*)
+		FROM room
+		WHERE 1=1
+		<if test='id != null and id != ""'>
+			AND id = #{id}
+		</if>
+		<if test='subject != null and subject != ""'>
+			AND subject LIKE CONCAT('%',#{subject},'%')
+		</if>
+		<if test='master != null and master != ""'>
+			AND master = #{master}
+		</if>
 	</select>
 
 	<delete id="DeleteRoom" parameterType="int">
-		DELETE FROM room WHERE id = #{roomId}
+		DELETE FROM room WHERE id
+		= #{roomId}
 	</delete>
 
 	<insert id="insertRoom" parameterType="com.spring.domain.Room">
-		INSERT INTO room (id, subject, master) VALUES(#{id}, #{subject}, #{master})
+		INSERT INTO room (id,
+		subject, master) VALUES(#{id}, #{subject}, #{master})
 	</insert>
 
 

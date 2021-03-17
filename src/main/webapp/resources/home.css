@@ -47,4 +47,8 @@
 	    cursor: pointer;
 	    border-radius:10px;
       }
+      
+      .page-item{
+      	cursor: pointer;
+      }
             

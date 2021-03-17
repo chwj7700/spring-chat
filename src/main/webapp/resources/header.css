@@ -2,9 +2,9 @@
 	
 	.nav-link{
 		color: white !important;
-	}
-	
-	li{
 		cursor:pointer;
 	}
-            
+	
+    .navbar-brand{
+   	 	cursor:pointer;
+    }

@@ -37,13 +37,13 @@ public class RoomDAO {
 	};
 
 	
-	public List<Room> selectRoomsWithPaging(Room roomVO){
-		List<Room> rooms = sql.selectList(namespace + ".selectRoomsWithPaging", roomVO);
+	public List<Room> selectRoomsWithPaging(Room room){
+		List<Room> rooms = sql.selectList(namespace + ".selectRoomsWithPaging", room);
 		return rooms;
 	}
 	
-	public int selectRoomTotalCount() {
-		int cnt = sql.selectOne(namespace + ".selectRoomTotalCount");
+	public int selectRoomTotalCount(Room room) {
+		int cnt = sql.selectOne(namespace + ".selectRoomTotalCount", room);
 		return cnt;
 	}
 

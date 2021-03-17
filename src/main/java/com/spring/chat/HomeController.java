@@ -33,13 +33,13 @@ public class HomeController {
 
 		model.addAttribute("notice", notices);
 		
-		Room roomVO = new Room();
-		roomVO.setLength(10);
-		roomVO.setStart(0);
-		List<Room> room = roomService.selectRoomsWithPaging(roomVO);
-		int roomCount = roomService.selectRoomTotalCount();
+		Room room = new Room();
+		room.setLength(10);
+		room.setStart(0);
+		List<Room> rooms = roomService.selectRoomsWithPaging(room);
+		int roomCount = roomService.selectRoomTotalCount(room);
 
-		model.addAttribute("room", room);
+		model.addAttribute("room", rooms);
 		model.addAttribute("roomCount", roomCount);
 		model.addAttribute("pageName", "chatList");
 		return "home";

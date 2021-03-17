@@ -4,10 +4,62 @@
 
 <script type="text/javascript">
 
+	/**
+	 * 채팅방 생성 팝업
+	 */
 	let subject_onclick = (id) =>{
 		window.open('/chat?roomId='+ id, 'windo', 'width=820,height=490,left=' + popupX2 + ',top='+ popupY2);
 	};
 	
+	/**
+	 * 페이징 처리
+	 */
+	let room_paging = (page, pageCount, totCount) => {
+		
+		let totPage = parseInt(totCount / pageCount) + 1;
+		let startPage = page - page%pageCount  +1;
+		
+		//startpage 예외처리
+		startPage -= page%pageCount == 0 ? pageCount : 0;
+		
+		let endPage = startPage + pageCount -1;
+		
+		//endpage가 totpage보다 크면 안된다.
+		endPage = endPage > totPage ? totPage : endPage;
+		
+		//previousPage가 1보다 작으면 안된다.
+		let previousPage = startPage-1;
+		previousPage = 1 > previousPage ? 1 : previousPage;
+		
+		//nextPage가 totpage보다 크면 안된다.
+		let nextPage = endPage + 1;
+		nextPage = nextPage > totPage ? totPage : nextPage;
+		
+		let pagination = "";
+		let pagePrevious = '<li class="page-item">'+
+		'<a class="page-link" onclick="room_search('+ previousPage +')" aria-label="Previous">'+
+		'<span aria-hidden="true">&laquo;</span>' +
+		'</a>'+
+		'</li>';
+		let pageNext = '<li class="page-item">' +
+		'<a class="page-link" onclick="room_search('+ nextPage +')"aria-label="Next">'+
+		'<span aria-hidden="true">&raquo;</span>'+
+		'</a>'+
+		'</li>';
+		
+		pagination += pagePrevious
+		for(let i = startPage; i<= endPage; i++){
+			let pageItem = '<li class="page-item"><a class="page-link" onclick="room_search('+ i +')">'+ i +'</a></li>';
+			pagination += pageItem;
+		}
+		pagination += pageNext;
+		
+		document.querySelector('#room_paging').innerHTML=pagination;
+	};
+	
+	/**
+	 * 채팅방 조회
+	 */
 	let room_search = (page) => {
 		const option = {
 				  url : 'http://localhost:8080/roomSearch',
@@ -17,13 +69,14 @@
 				     'Content-Type':'application/json;charset=UTP-8'
 				  },
 				  data:{
-					id : document.querySelector('#chat_search_id').value,
-					master : document.querySelector('#chat_search_master').value,
-					subject : document.querySelector('#chat_search_subject').value,
+					id : document.querySelector('#room_search_id').value,
+					master : document.querySelector('#room_search_master').value,
+					subject : document.querySelector('#room_search_subject').value,
 				    length : 10,
 				    start : (page-1) * 10
 				  }
 		};
+		
 		axios(option)
 			.then(response => {
 				
@@ -44,55 +97,20 @@
 							'</tr>';
 					tbody += row;
 				});
-				document.querySelector('#chat_table_tbody').innerHTML=tbody;
-				
+				document.querySelector('#room_table_tbody').innerHTML=tbody;
 				
 				//==페이징 처리==//
-				let pageCount = 10;
-				let totCount = response.data.count;
-				let totPage = parseInt(totCount / pageCount) + 1;
-				let startPage = page - page%pageCount + 1;
-				let endPage = startPage + pageCount -1;
-				
-				//endpage가 totpage보다 크면 안된다.
-				endPage = endPage > totPage ? totPage : endPage;
-				
-				//previousPage가 1보다 작으면 안된다.
-				let previousPage = startPage-1;
-				previousPage = 1 > previousPage ? 1 : previousPage;
-				
-				//nextPage가 totpage보다 크면 안된다.
-				let nextPage = endPage + 1;
-				nextPage = nextPage > totPage ? totPage : nextPage;
-				
-				let pagination = "";
-				let pagePrevious = '<li class="page-item">'+
-				'<a class="page-link" onclick="room_search('+ previousPage +')" aria-label="Previous">'+
-				'<span aria-hidden="true">&laquo;</span>' +
-				'</a>'+
-				'</li>';
-				let pageNext = '<li class="page-item">' +
-				'<a class="page-link" onclick="room_search('+ nextPage +')"aria-label="Next">'+
-				'<span aria-hidden="true">&raquo;</span>'+
-				'</a>'+
-				'</li>';
-				
-				pagination += pagePrevious
-				for(let i = startPage; i<= endPage; i++){
-					let pageItem = '<li class="page-item"><a class="page-link" onclick="room_search('+ i +')">'+ i +'</a></li>';
-					pagination += pageItem;
-				}
-				pagination += pageNext;
-				
-				document.querySelector('#chat_paging').innerHTML=pagination;
-				console.log(data);
+				room_paging(page, 10, response.data.count);
 			}).catch(response => console.log('Error!'));
 	};
 	
+	/**
+	 * 초기화
+	 */
 	let room_reset = () => {
-		document.querySelector('#chat_search_id').value="";
-		document.querySelector('#chat_search_master').value="";
-		document.querySelector('#chat_search_subject').value="";
+		document.querySelector('#room_search_id').value="";
+		document.querySelector('#room_search_master').value="";
+		document.querySelector('#room_search_subject').value="";
 	};
 </script>
 
@@ -103,15 +121,15 @@
 			<tr>
 				<th class="table-light" style="width: 100px; text-align: right;">방번호</th>
 				<td><input type="text" class="form-control form-control-sm"
-					id="chat_search_id" name="id" value=""></td>
+					id="room_search_id" name="id" value=""></td>
 				<th class="table-light" style="width: 100px; text-align: right;">방장</th>
 				<td><input type="text" class="form-control form-control-sm"
-					id="chat_search_master" name="master" value=""></td>
+					id="room_search_master" name="master" value=""></td>
 			</tr>
 			<tr>
 				<th class="table-light" style="width: 100px; text-align: right;">제목</th>
 				<td colspan="3"><input type="text"
-					class="form-control form-control-sm" id="chat_search_subject"
+					class="form-control form-control-sm" id="room_search_subject"
 					name="subject" value=""></td>
 			</tr>
 			<tr>
@@ -138,7 +156,7 @@
 
 		<!-- 검색결과 -->
 		<div>
-			<table class="table table-bordered" id="chat_table">
+			<table class="table table-bordered" id="room_table">
 				<thead class="table-active">
 					<tr style="text-align: center;">
 						<th width="10%">방 번호</th>
@@ -146,22 +164,13 @@
 						<th width="15%">방장</th>
 					</tr>
 				</thead>
-				<tbody id="chat_table_tbody">
+				<tbody id="room_table_tbody">
 				</tbody>
 			</table>
 		</div>
 		<div>
 			<nav aria-label="Page navigation example">
-				<ul class="pagination justify-content-center" id="chat_paging">
-					<li class="page-item"><a class="page-link" href="#"
-						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-					</a></li>
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item"><a class="page-link" href="#"
-						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-					</a></li>
+				<ul class="pagination justify-content-center" id="room_paging">
 				</ul>
 			</nav>
 		</div>

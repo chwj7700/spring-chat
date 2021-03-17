@@ -14,13 +14,13 @@ public class RoomService {
 	@Autowired
 	private RoomDAO dao;
 
-	public List<Room> selectRoomsWithPaging(Room roomVO) {
-		List<Room> rooms = dao.selectRoomsWithPaging(roomVO);
+	public List<Room> selectRoomsWithPaging(Room room) {
+		List<Room> rooms = dao.selectRoomsWithPaging(room);
 		return rooms;
 	}
 
-	public int selectRoomTotalCount() {
-		int cnt = dao.selectRoomTotalCount();
+	public int selectRoomTotalCount(Room room) {
+		int cnt = dao.selectRoomTotalCount(room);
 		return cnt;
 	}
 
