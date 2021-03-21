@@ -1,14 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ page session="true" %>
 <script type="text/javascript">
 
 	/**
 	 * 채팅방 생성 팝업
 	 */
 	let subject_onclick = (id) =>{
-		window.open('/chat?roomId='+ id, 'windo', 'width=820,height=490,left=' + popupX2 + ',top='+ popupY2);
+		if (global.loginId != null && global.loginId != ""){
+			window.open('/chat?roomId='+ id, 'windo', 'width=820,height=490,left=' + popupX2 + ',top='+ popupY2);
+		}else{
+			alert("먼저 로그인 해주시기 바랍니다.");
+		}
 	};
 	
 	/**

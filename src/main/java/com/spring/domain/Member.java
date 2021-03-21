@@ -2,7 +2,6 @@ package com.spring.domain;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-//member ���̺�
 public class Member {
 	@NotEmpty
 	private String id, pw ,name;

@@ -11,12 +11,9 @@
 <link rel="stylesheet" href="resources/header.css">
 
 <script type="text/javascript">
-	var data = {};
-	data.pageName = "chatList";
-
 	var page = function (pageName) {
-		document.querySelector("#" + data.pageName).style = "display:none";
-		data.pageName = pageName;
+		document.querySelector("#" + global.pageName).style = "display:none";
+		global.pageName = pageName;
 		document.querySelector("#" + pageName).style = "display:block";
 	};
 </script>
@@ -26,15 +23,17 @@
 	<input type="hidden" id="pageName" name="pageName" value="${pageName}" />
 	<script type="text/javascript">
 		$(function() {
-			data.pageName = document.querySelector("#pageName").value;
-			page(data.pageName);
+			global.pageName = document.querySelector("#pageName").value;
+			page(global.pageName);
+			global.loginId = document.querySelector("#loginId").value;
+			console.log(global.loginId);
 		});
 	</script>
 
 	<div style="margin-bottom: 60px;">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container">
-				<a class="navbar-brand" onclick='page("chatList")'>Web chatting</a>
+				<a class="navbar-brand" onclick='page("room")'>Web chatting</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarSupportedContent"
 					aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -45,6 +44,7 @@
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<div class="mr-auto"></div>
 					<form class="form-inline my-2 my-lg-0">
+						<input type="hidden" id="loginId" value="${loginid.id}">
 						<ul class="navbar-nav">
 							<li class="nav-item active"><a class="nav-link"
 								onclick='page("notice")'>공지사항</a></li>

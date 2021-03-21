@@ -3,6 +3,7 @@ package com.spring.domain;
 /**
  * @author chwj7700
  */
+
 public class Room {
 
 	private int id;

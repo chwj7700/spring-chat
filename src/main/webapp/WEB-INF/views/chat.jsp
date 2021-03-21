@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,10 +13,10 @@
     var pathname = window.location.pathname; /* '/'부터 오른쪽에 있는 모든 경로*/
     var appCtx = pathname.substring(0, pathname.indexOf("/",2));
     var root = url+appCtx;
-    var path =""; //프로젝트 패스
+    var path ="/"; //프로젝트 패스
      
     //var ws = new WebSocket("ws://192.168.0.100:8081/SpringWeb/echo-ws");
-    var ws = new WebSocket("ws://"+root+"/echo-ws");
+    var ws = new WebSocket("ws://"+root+"/chat-ws");
    
     ws.onopen = function () {
     	$('input[name=chatInput]').focus();
@@ -133,6 +134,10 @@
     ws.onclose = function (event) {
         $('#chatStatus').text('Info: connection closed.');
     };
+    
+    ws.onerror = function(event){
+    	  console.log(event);
+    }
     
     //파일 업로드---------------------------------------------------
     //원본파일이름을 목록에 출력하기 위해
