@@ -8,12 +8,14 @@
 <meta charset="utf-8">
 <title>Websocket Client</title>
 <link rel="stylesheet" href="resources/home.css" type="text/css" />
+<link rel="stylesheet" href="resources/modal.css" type="text/css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="resources/global.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
 	var popupX = (window.screen.width / 2) - (750 / 2);

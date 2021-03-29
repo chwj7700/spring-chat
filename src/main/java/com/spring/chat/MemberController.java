@@ -65,12 +65,12 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/login", method = { RequestMethod.POST, RequestMethod.GET })
-	public String login(Member vo, HttpServletRequest req, RedirectAttributes rttr, HttpServletResponse response,
+	public String login(Member member, HttpServletRequest req, RedirectAttributes rttr, HttpServletResponse response,
 			Model model) throws Exception {
 		logger.info("post login");
 
 		HttpSession session = req.getSession();
-		Member login = service.selectMember(vo);
+		Member login = service.selectMember(member);
 
 		if (login == null) {
 			logger.info("로그인if");

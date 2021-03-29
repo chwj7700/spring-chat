@@ -116,7 +116,17 @@
 		document.querySelector('#room_search_master').value="";
 		document.querySelector('#room_search_subject').value="";
 	};
+	
+
+	let room_make = () =>{
+		document.querySelector('#makeRoomContent').style.width = "750px";
+		document.querySelector('#makeRoomContent').style.height = "530px";
+		document.querySelector('#makeRoom').style.display="block";
+		//window.open('./make', 'windo', 'width=750,height=530,left=' + popupX + ',top='+ popupY)
+	}
 </script>
+
+<jsp:include page="makeRoom.jsp" />
 
 <div>
 	<div>
@@ -153,7 +163,7 @@
 			<c:if test="${loginid.id != null }">
 				<button class=" btn btn-secondary"
 					style="float: right; width: 100px;"
-					onclick="window.open('./make', 'windo', 'width=750,height=530,left=' + popupX + ',top='+ popupY)">방만들기</button>
+					onclick="room_make()">방만들기</button>
 			</c:if>
 		</div>
 

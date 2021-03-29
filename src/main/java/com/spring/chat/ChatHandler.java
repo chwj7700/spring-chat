@@ -34,7 +34,7 @@ public class ChatHandler extends TextWebSocketHandler {
 //    	roomId = roomId.substring(1, roomId.indexOf("\""));
 //    	System.out.println(roomId);
     	Map<String,Object> map = session.getAttributes();
-    	String roomId = (String)map.get("roomId");
+    	String roomId = map.get("roomId").toString();
     	for (WebSocketSession sess : sessionList) {
     		if(RoomIdMap.get(sess).equals(roomId)) {
     			sess.sendMessage(new TextMessage(payloadMessage));
@@ -51,9 +51,10 @@ public class ChatHandler extends TextWebSocketHandler {
         
     	Member login = new Member();
     	login = (Member)map.get("loginid");
-    	String loginID = login.getId();
-    	String roomId = (String)map.get("roomId");
     	
+    	String loginID = login.getId();
+    	String roomId = map.get("roomId").toString();
+    	System.out.println(roomId);
     	System.out.println(loginID);
     	sessionList.add(session);
     	MemberIdMap.put(session, loginID);
@@ -62,6 +63,7 @@ public class ChatHandler extends TextWebSocketHandler {
     	Date date = new Date();
     	long now = date.getTime();
     	TextMessage message = new TextMessage("{\"type\":\"notice\",\"text\":\"" + loginID + "님이 입장하셨습니다.\",\"id\":\"" + loginID + "\"," + "\"date\":"+ now +"}");
+    	
     	this.handleTextMessage(session, message);
     	
     	String text = "{\"type\":\"participants\",\"text\":\"";
@@ -74,7 +76,6 @@ public class ChatHandler extends TextWebSocketHandler {
     	TextMessage message2 = new TextMessage(text);
     	this.handleTextMessage(session, message2);
     	
-    	
         System.out.println("클라이언트 접속됨");
     }
  
@@ -86,7 +87,6 @@ public class ChatHandler extends TextWebSocketHandler {
     	String roomId = RoomIdMap.get(session);
         Date date = new Date();
     	long now = date.getTime();
-    	
     	TextMessage message = new TextMessage("{\"type\":\"notice\",\"text\":\"" + loginID + "님이 퇴장하셨습니다.\",\"id\":\"" + loginID + "\"," + "\"date\":"+ now +"}");
     	
        	String text = "{\"type\":\"participants\",\"text\":\"";
@@ -100,7 +100,6 @@ public class ChatHandler extends TextWebSocketHandler {
     	text += "\",\"id\":\"" + loginID + "\"," + "\"date\":"+ now +"}";
     	
     	TextMessage message2 = new TextMessage(text);
-    	
     	
     	for (WebSocketSession sess : sessionList) {
     		if(RoomIdMap.get(sess).equals(roomId)) {
