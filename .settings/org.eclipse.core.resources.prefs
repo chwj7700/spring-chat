@@ -2,4 +2,4 @@ eclipse.preferences.version=1
 encoding//src/main/java/com/spring/chat/ChatHandler.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/joinForm.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/loginForm.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/room.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/roomList.jsp=UTF-8

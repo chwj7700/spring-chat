@@ -12,7 +12,9 @@
 
 <script type="text/javascript">
 	var page = function (pageName) {
-		document.querySelector("#" + global.pageName).style = "display:none";
+		if(global.pageName != pageName){ // 처음로딩될때 두번호출되는것 방지
+			document.querySelector("#" + global.pageName).style = "display:none";
+		}
 		global.pageName = pageName;
 		document.querySelector("#" + pageName).style = "display:block";
 	};
@@ -33,7 +35,7 @@
 	<div style="margin-bottom: 60px;">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container">
-				<a class="navbar-brand" onclick='page("room")'>Web chatting</a>
+				<a class="navbar-brand" onclick='page("roomList")'>Web chatting</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarSupportedContent"
 					aria-controls="navbarSupportedContent" aria-expanded="false"

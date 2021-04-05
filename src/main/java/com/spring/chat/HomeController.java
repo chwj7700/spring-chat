@@ -41,7 +41,7 @@ public class HomeController {
 
 		model.addAttribute("room", rooms);
 		model.addAttribute("roomCount", roomCount);
-		model.addAttribute("pageName", "room");
+		model.addAttribute("pageName", "roomList");
 		return "home";
 	}
 }

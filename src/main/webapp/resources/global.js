@@ -1,3 +1,3 @@
 var global = {};
-global.pageName = "room";
+global.pageName = "roomList";
 global.loginId = "";

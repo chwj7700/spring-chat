@@ -25,8 +25,33 @@
 </style>
 
 <script>
-	function aas() {
-		var subject = document.getElementById("subject");
+	let makeRoom_create = () =>{
+		if(!makeRoom_createValidation()){
+			return false;
+		}
+		
+		const option = {
+				  url : 'http://localhost:8080/roomCreate',
+				  method:'POST',
+				  header:{
+				     'Accept':'application/json',
+				     'Content-Type':'application/json;charset=UTP-8'
+				  },
+				  data:{
+					subject : document.querySelector('#makeRoom_subject').value
+				  }
+		};
+		
+		axios(option)
+		.then(response => {
+			makeRoom_close();
+			let roomId = response.data;
+			roomList_makeCallback(roomId);
+		}).catch(response => console.log('Error!'));
+	};
+	
+	function makeRoom_createValidation() {
+		var subject = document.getElementById("makeRoom_subject");
 		if (subject.value == "") {
 			alert("방제목을 입력해주세요");
 			return false;
@@ -34,7 +59,7 @@
 			return true;
 	}
 	
-	let makeRoomClose = () => {
+	let makeRoom_close = () => {
 		document.querySelector('#makeRoom').style.display="none";
 	}
 </script>
@@ -43,7 +68,7 @@
 		<!-- Modal content -->
 		<div id="makeRoomContent" class="modal-content">
 			<div>
-				<button style="float: right" onclick='makeRoomClose()'>X</button>
+				<button style="float: right" onclick='makeRoom_close()'>X</button>
 			</div>
 			<p></p>
 			<div
@@ -56,13 +81,13 @@
 				<h4>
 					<font color="#ABABAB">채팅방 이름을 입력해주세요</font>
 				</h4>
-				<form method="post" onsubmit="return aas();">
+				<div>
 					<h4>방 제목</h4>
-					<input id="subject" class="inputroom" type="text" name="subject"
+					<input id="makeRoom_subject" class="inputroom" type="text" name="subject"
 						maxlength="10"
 						style="text-align: center; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-right: 2px solid #ffffff; border-bottom: 2px solid #eaeaea;">
-					<input type="submit" id="btn" class="roomButton" value="만들기" />
-				</form>
+					<button id="btn" class="roomButton" onclick="makeRoom_create()">만들기</button>
+				</div>
 			</div>
 	</div>
 </div>

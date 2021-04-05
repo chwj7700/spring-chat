@@ -48,32 +48,32 @@ public class RoomController {
     	return null;
     }
     
-    @RequestMapping(value = "/make", method=RequestMethod.GET)
-    public void getmake() throws Exception {}
-    
-    @RequestMapping(value="/make", method=RequestMethod.POST)
-    public String postmake(@Valid Room room, HttpServletResponse response,RedirectAttributes rttr, HttpServletRequest req, BindingResult bindingResult) throws Exception{
-    	HttpSession session = req.getSession();
-    	List<Room> roomList = roomService.selectRooms();
-        
-    	int roomId = 1;
-    	for(Room e : roomList) {
-    		if(e.getId() != roomId) {
-    			break;
-    		}
-    		roomId +=1;
-    	}
-	
-    	room.setId(roomId);
-    	room.setMaster(((Member)session.getAttribute("loginid")).getId());
-    	roomService.insertRoom(room);
-    	
-    	response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();	 
-		out.println("<script>opener.parent.location.reload(); window.close();</script>");
-		out.flush();
-		return null;
-    }
+//    @RequestMapping(value = "/make", method=RequestMethod.GET)
+//    public void getmake() throws Exception {}
+//    
+//    @RequestMapping(value="/make", method=RequestMethod.POST)
+//    public String postmake(@Valid Room room, HttpServletResponse response,RedirectAttributes rttr, HttpServletRequest req, BindingResult bindingResult) throws Exception{
+//    	HttpSession session = req.getSession();
+//    	List<Room> roomList = roomService.selectRooms();
+//        
+//    	int roomId = 1;
+//    	for(Room e : roomList) {
+//    		if(e.getId() != roomId) {
+//    			break;
+//    		}
+//    		roomId +=1;
+//    	}
+//	
+//    	room.setId(roomId);
+//    	room.setMaster(((Member)session.getAttribute("loginid")).getId());
+//    	roomService.insertRoom(room);
+//    	
+//    	response.setContentType("text/html; charset=UTF-8");
+//		PrintWriter out = response.getWriter();	 
+//		out.println("<script>opener.parent.location.reload(); window.close();</script>");
+//		out.flush();
+//		return null;
+//    }
     
     @RequestMapping(value = "/chat", method=RequestMethod.GET)
     public String chat(Model model, @RequestParam(value="roomId")int roomId, HttpServletRequest req) {
@@ -101,5 +101,25 @@ public class RoomController {
 		int roomCount = roomService.selectRoomTotalCount(room);
 		RoomVO roomVO =  RoomVO.createRoomVO(rooms, roomCount);
 		return roomVO;
+    }
+    
+    @RequestMapping(value="/roomCreate", method=RequestMethod.POST)
+    @ResponseBody
+    public int roomCreate(@RequestBody Room room, HttpServletRequest req) throws Exception{
+    	HttpSession session = req.getSession();
+    	List<Room> roomList = roomService.selectRooms();
+        
+    	int roomId = 1;
+    	for(Room e : roomList) {
+    		if(e.getId() != roomId) {
+    			break;
+    		}
+    		roomId +=1;
+    	}
+	
+    	room.setId(roomId);
+    	room.setMaster(((Member)session.getAttribute("loginid")).getId());
+    	roomService.insertRoom(room);
+		return roomId;
     }
 }

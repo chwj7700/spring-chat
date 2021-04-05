@@ -40,8 +40,8 @@
 			<jsp:include page="notice.jsp" />
 		</div>
 
-		<div id="room" style="display: none;">
-			<jsp:include page="room.jsp" />
+		<div id="roomList" style="display: none;">
+			<jsp:include page="roomList.jsp" />
 		</div>
 	</div>
 
