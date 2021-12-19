@@ -155,6 +155,16 @@
 	};
 	
 	/**
+	 * 채팅방 팝업 호출.. -> spa로 구현시 오히려 불편하다는 의견 -> 새창으로 띄우기로 결정
+	 */ 
+// 	let chatRoom_make = () =>{
+// 		document.querySelector('#chatRoomContent').style.width = "750px";
+// 		document.querySelector('#chatRoomContent').style.height = "530px";
+// 		document.querySelector('#chatRoom').style.display="block";
+		//window.open('./make', 'windo', 'width=750,height=530,left=' + popupX + ',top='+ popupY)
+// 	};
+	
+	/**
 	 * 방 생성 팝업 호출 후 콜백
 	 */ 
 	 let roomList_makeCallback = (roomId) =>{
@@ -165,6 +175,7 @@
 </script>
 
 <jsp:include page="makeRoom.jsp" />
+<%-- <jsp:include page="chat.jsp" /> --%>
 
 <div>
 	<div>

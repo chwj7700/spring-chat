@@ -72,7 +72,7 @@
 			</div>
 			<p></p>
 			<div
-				style="text-align: center; font-size: 35px; display: table-cell; height: 50px; vertical-align: middle; color: #00AE8E; font-weight: bold; border: 1px solid #eaeaea; width: 700px; background-color: white;">Spring
+				style="text-align: center; font-size: 35px; display: table-cell; height: 50px; vertical-align: middle; color: #000000; font-weight: bold; border: 1px solid #eaeaea; width: 700px; background-color: white;">Spring
 				Web Chatting</div>
 			<br /> <br />
 			<div
@@ -86,7 +86,9 @@
 					<input id="makeRoom_subject" class="inputroom" type="text" name="subject"
 						maxlength="10"
 						style="text-align: center; border-top: 2px solid #ffffff; border-left: 2px solid #ffffff; border-right: 2px solid #ffffff; border-bottom: 2px solid #eaeaea;">
-					<button id="btn" class="roomButton" onclick="makeRoom_create()">만들기</button>
+					<button class="btn btn-secondary" style='width: 100px'
+							onclick='makeRoom_create()'>만들기</button>
+					<!-- <button id="btn" class="roomButton" onclick="makeRoom_create()">만들기</button> -->
 				</div>
 			</div>
 	</div>

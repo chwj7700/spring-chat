@@ -3,6 +3,8 @@
 	
 <form method="post" action="join">
 	<div class="form-group row">
+		<div class="col-sm-3">
+		</div>
 		<label for="staticEmail" class="col-sm-2 col-form-label">ID</label>
 		<div class="col-sm-4">
 			<input type="text" class="form-control" id="id" name="id"
@@ -11,6 +13,8 @@
 	</div>
 
 	<div class="form-group row">
+		<div class="col-sm-3">
+		</div>
 		<label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
 		<div class="col-sm-4">
 			<input type="text" class="form-control" id="loginForm_name"
@@ -19,6 +23,8 @@
 	</div>
 
 	<div class="form-group row">
+		<div class="col-sm-3">
+		</div>
 		<label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
 		<div class="col-sm-4">
 			<input type="password" id="loginForm_pw" name="pw"
@@ -27,6 +33,8 @@
 	</div>
 
 	<div class="form-group row">
+		<div class=" col-sm-3 ">
+		</div>
 		<div class="col-sm-6">
 			<button type="submit" class="btn btn-primary btn-lg btn-block">Sign
 				in</button>

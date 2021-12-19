@@ -58,7 +58,7 @@
         });
     };
     ws.onmessage = function (event) {
-    	$('div#participants').empty();
+//     	$('div#participants').empty();
     	var text = "";
     	var msg = JSON.parse(event.data);
     	var time = new Date(msg.date);
@@ -257,27 +257,28 @@
 </div>
 <!-- <div id='chatStatus'></div> -->
 <div style = "width : 803px; height : 30px;">
-	<div style="text-size:20px; padding:5px; border:1px solid #00AE8E; border-bottom: 0px; text-align: center;'"><b>${subject}</b></div>
-	<div id="view" style="overflow:auto; border:1px solid #00AE8E; border-right:none; height :400px; width:600px; float:left">
+	<div style="text-size:20px; padding:5px; border:1px solid #000000; border-bottom: 0px; text-align: center;'"><b>${subject}</b></div>
+	<div id="view" style="overflow:auto; border:1px solid #000000; border-right:none; height :400px; width:600px; float:left">
 	<div id="placeholder" style=" position: absolute; top:0; bottom:0; left:10px; right:0; margin:auto 0; height:15px; 
   width:600px;color:#888888;font-size:15px;text-align:center;">파일은 마우스로 끌어오세요.</div>	
 	</div>
 	<div style="float:left; width:202px; height:400px;">
-		<div style="text-align : center; width :202px; height :30px; line-height:30px; background:#00AE8E; color:white;">참여인원</div>
-		<div id="participants" style="width :200px; height : 370px; border:1px solid #00AE8E;"></div>
+		<div style="text-align : center; width :202px; height :30px; line-height:30px; background:#000000; color:white;">참여인원</div>
+		<div id="participants" style="width :200px; height : 370px; border:1px solid #000000;"></div>
 	</div>
 	<br>
 	<div style="clear:Both; width:803px; padding-top:10px;">
 		<input type="text" name="chatInput" style="float:left; width:430px; font-size:20px; height:30px; ">
+		
 		<input type="button" id="chatButton" value="보내기" style="margin-left:10px; width:150px; font-size:17px; float:left; height:30px; text-align: 
-		center;background: #00AE8E ;border: none; border-radius: 5px; color:white;">
+ 		center;background: #000000 ;border: none; border-radius: 5px; color:white;">
 		
 
 		<c:if  test="${id == master}">
 			<form method="post" action="./delete">
 			<input type="hidden" id="roomId" name="roomId" value="<%=request.getParameter("roomId").toString()%>">
 			<input type="submit" id="deleteButton" value="방 삭제" style="width:150px; font-size:17px; float:right; height:30px; text-align: 
-			center;background: #00AE8E ;border: none; border-radius: 5px; color:white;">
+			center;background: #000000 ;border: none; border-radius: 5px; color:white;">
 			</form>
 		</c:if>
 	</div>

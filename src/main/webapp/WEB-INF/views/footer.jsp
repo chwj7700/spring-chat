@@ -24,9 +24,9 @@
 <!-- 푸터 -->
 <div>
 	<footer class="container-fluid pb-0 mb-0 justify-content-center footer">
-		<div class="row my-4 justify-content-center py-4 footerdiv">
+		<div class="row my-5 justify-content-center py-5 footerdiv">
 			<div class="col-11">
-				<div class="row ">
+				<div class="row">
 					<div class="col-xl-8 col-md-4 col-sm-4 col-12 my-auto mx-auto a">
 						<h3 class="text-muted mb-md-0 mb-5 bold-text">Web Chatting</h3>
 					</div>
@@ -37,16 +37,13 @@
 						<ul class="list-unstyled">
 							<li>Choi Woo Jung</li>
 							<li>Yu Eui Sang</li>
-							<li>No Won Ho</li>
-							<li>Yeo Su Hyang</li>
 						</ul>
 					</div>
 					<div class="col-xl-2 col-md-4 col-sm-4 col-12">
 						<h6 class="mb-3 mb-lg-4 text-muted bold-text mt-sm-0 mt-5">
 							<b>ADDRESS</b>
 						</h6>
-						<p class="mb-1">146, Teheran-ro, Gangnam-gu, Seoul,Republic of
-							Korea</p>
+						<p class="mb-1">590, Gyeongin-ro, Bucheon-si, Gyeonggi-do, Republic of Korea</p>
 						<p></p>
 					</div>
 				</div>

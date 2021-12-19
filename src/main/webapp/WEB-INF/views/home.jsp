@@ -35,8 +35,8 @@
 		<div id="loginForm" style="display: none;">
 			<jsp:include page="loginForm.jsp" />
 		</div>
-		
-		<div id="notice" style="display: none;">
+	
+ 		<div id="notice" style="display: none;">
 			<jsp:include page="notice.jsp" />
 		</div>
 

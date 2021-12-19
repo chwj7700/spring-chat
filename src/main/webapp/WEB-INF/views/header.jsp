@@ -48,11 +48,11 @@
 					<form class="form-inline my-2 my-lg-0">
 						<input type="hidden" id="loginId" value="${loginid.id}">
 						<ul class="navbar-nav">
-							<li class="nav-item active"><a class="nav-link"
-								onclick='page("notice")'>공지사항</a></li>
+							<!-- <li class="nav-item active"><a class="nav-link"
+								onclick='page("notice")'>공지사항</a></li> -->
 							<c:if test="${loginid.id != null }">
-								<li class="nav-item"><a class="nav-link"
-									onclick='page("loginForm")'>마이페이지</a></li>
+								<!-- <li class="nav-item"><a class="nav-link"
+									onclick='page("loginForm")'>마이페이지</a></li> -->
 								<li class="nav-item"><a class="nav-link"
 									href='/logout'>로그아웃</a></li>
 							</c:if>
